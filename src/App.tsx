@@ -1,14 +1,8 @@
-
-
-import './App.css'
+import './App.css';
 
 function App() {
-
-
   return (
     <>
-
-
       <main>
         <div>
           <h1>Planejai</h1>
@@ -18,15 +12,9 @@ function App() {
           <a href="#">Login</a>
           <a href="#">Cadastro</a>
         </div>
-
-
       </main>
-
-
-
-
     </>
-  )
+  );
 }
 
-export default App
+export default App;
