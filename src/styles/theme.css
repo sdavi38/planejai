@@ -30,7 +30,7 @@
 }
 
 @theme {
-    --color-background: var(--background);
+    --color-background: var(--background-color);
     --color-foreground: var(--foreground);
     --color-primary: var(--primary);
     --color-primary-foreground: var(--primary-foreground);
