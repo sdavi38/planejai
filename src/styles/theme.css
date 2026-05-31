@@ -1,0 +1,47 @@
+@layer base {
+
+    :root,
+    [data-theme='ligth'] {
+        --background-color: #f8fafc;
+        --foreground: #0f1729;
+        --primary: #925cf0;
+        --primary-foreground: #f8fafc;
+        --card: #fcfcfe;
+        --border: rgba(9, 9, 11, 0.08);
+        --muted-primary: rgba(146, 92, 240, 0.05);
+        --muted-foreground: #64749a;
+        --input: #fcfcfe;
+        --secondary-button: #f1f5f9;
+    }
+
+    [data-theme='dark'] {
+        --background-color: #0f0d16;
+
+        --foreground: #fcfcfe;
+        --primary: #925cf0;
+        --primary-foreground: #f8fafc;
+        --card: #181622;
+        --border: rgba(9, 9, 11, 0.04);
+        --muted-primary: rgba(146, 92, 240, 0.02);
+        --muted-foreground: #ad9fc8;
+        --input: #232131;
+        --secondary-button: #27272a;
+    }
+}
+
+@theme {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-card: var(--card);
+    --color-border: var(--border);
+    --color-muted-primary: var(--muted-primary);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-input: var(--input);
+    --color-secondary-button: var(--secondary-button);
+
+    --color-red: #ef4444;
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+}
