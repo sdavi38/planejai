@@ -9,3 +9,7 @@ pn add tailwindcss @tailwindcss/vite
 ### Adicionando Inter Font
 
 pn add @fontsource/inter
+
+pn add react-router-dom
+
+pn add lucide-reac
