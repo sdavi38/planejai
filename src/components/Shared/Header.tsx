@@ -1,16 +1,33 @@
-
+import { TrendingUp, Wallet } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "./Button";
 
 
 export default function Header() {
+    const navigate = useNavigate();
+
     return (
-        <header className='fixed left-0 right-0 top-4 w-[calc(100vw-2rem)] mx-auto max-w-md flex items-center justify-between bg-background-elevated backdrop-blur-md px-4 py-3 rounded-2xl'>
-            <span className='font-bold text-lg'>planejai</span>
-            <button
+        <header className='border-b border-(--border) px-6 py-3'>
+            <nav className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                    <div className="bg-primary flex h-9 w-9 items-center justify-center rounded-full">
+                        <Wallet size={20} className="text-primary-foreground" />
+                    </div>
+                    <span className="text-lg">
+                        <span className="text-muted-foreground font-medium">Planej</span>
+                        <span className="font-bold text-foreground">.ai</span>
+                    </span>
 
-
-            >
-
-            </button>
+                </div>
+                {/* Action Buttons */}
+                <div className="flex items-center gap-1">
+                    <Button
+                        variant="secondary"
+                        icon={TrendingUp}
+                        onClick={() => navigate("/")}
+                    ><span className="hidden sm:inline">Nova Simulação</span><span className="sm:hidden">Nova</span></Button>
+                </div>
+            </nav>
 
         </header>
     )
