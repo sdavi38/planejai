@@ -1,6 +1,7 @@
 import { ArrowLeft, ArrowRight, type LucideIcon } from "lucide-react";
 import { Input, type InputProps } from "../../../../components/Shared/Input";
 import { Button } from "../../../../components/Shared/Button";
+import type { SyntheticEvent } from "react";
 
 export interface FormStepProps {
     id: string
@@ -17,7 +18,18 @@ export interface FormStepProps {
 
 }
 
-export default function FormStep({ icon: Icon, title, question, inputProps, submitButtonProps }: FormStepProps) {
+interface ActionButtonsProps {
+    onBack: () => void
+    onNext: () => void
+    hiderBackButton?: boolean
+}
+
+export default function FormStep({ icon: Icon, title, question, inputProps, submitButtonProps, onBack, onNext, hiderBackButton }: FormStepProps & ActionButtonsProps) {
+
+    const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        onNext()
+    }
 
     return (
         <div className="bg-card rounded-2xl p-6 shadow-[4px_4px_18px_0px_rbga(0,0,0,0.2)] sm:p-8">
@@ -31,19 +43,24 @@ export default function FormStep({ icon: Icon, title, question, inputProps, subm
             <h2 className="text-foreground mb-6 text-xl leading-snug font-semibold sm:text-2xl">
                 {question}
             </h2>
-            <form className=" flex flex-col gap-6">
+            <form
+                onSubmit={handleSubmit}
+                className=" flex flex-col gap-6">
                 <Input {...inputProps} />
                 <div className="flex flex-col gap-3 sm:flex-row sm:gap-6">
-
-                    <Button
-                        type="button"
-                        variant="ghost"
-                        icon={ArrowLeft}
-                        className="order-2 flex-1 justify-center rounded-xl py-3 sm:order-1">
-                        Voltar</Button>
+                    {!hiderBackButton && (
+                        <Button
+                            type="button"
+                            variant="ghost"
+                            onClick={onBack}
+                            icon={ArrowLeft}
+                            className="order-2 flex-1 justify-center rounded-xl py-3 sm:order-1">
+                            Voltar</Button>
+                    )}
 
                     <Button
                         type="submit"
+
                         variant="primary"
                         className="order-1 flex-1 sm:order-2"
                         icon={!submitButtonProps ? ArrowRight : undefined}
