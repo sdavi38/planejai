@@ -4,6 +4,7 @@ import type { LucideIcon } from "lucide-react"
 interface ButtonProps extends BaseHTMLAttributes<HTMLButtonElement> {
     variant?: 'primary' | 'secondary' | 'danger' | 'ghost'
     icon?: LucideIcon
+    type?: "button" | "submit" | "reset"
 
 }
 const baseClasses = 'flex cursor-pointer items-center justify-center text-sm px-4 py-3 font-mediun gap-2 transition-opacity hover:opacity-80 disabled:opacity-80 disabled:cursor-not-allowed'
@@ -18,6 +19,7 @@ export function Button({
 
     variant,
     icon: Icon,
+    type,
     className,
     children,
     ...props
