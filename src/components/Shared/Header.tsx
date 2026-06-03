@@ -1,4 +1,4 @@
-import { TrendingUp, Wallet } from "lucide-react";
+import { Clock, TrendingUp, Wallet } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./Button";
 
@@ -26,6 +26,11 @@ export default function Header() {
                         icon={TrendingUp}
                         onClick={() => navigate("/")}
                     ><span className="hidden sm:inline">Nova Simulação</span><span className="sm:hidden">Nova</span></Button>
+                    <Button
+                        variant="ghost"
+                        icon={Clock}
+                        onClick={() => navigate("/history")}
+                    ><span className="hidden sm:inline">Histórico</span><span className="sm:hidden">Histórico</span></Button>
                 </div>
             </nav>
 
