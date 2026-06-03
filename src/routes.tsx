@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { Button } from './components/Shared/Button';
-import { User2 } from 'lucide-react';
+
 import RootLayout from './components/layout/RootLayout';
+import SimulationPage from './pages/SimulationPage';
 
 
 export const router = createBrowserRouter([
@@ -10,6 +10,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/',
+                element: <SimulationPage />
 
             },
             {
