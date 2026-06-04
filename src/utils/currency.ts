@@ -2,12 +2,12 @@ export function formatCurrencyMask(value: string): string {
     const digits = value.replace(/\D/g, "")
 
     if (!digits) {
-        return
+        return ""
     }
     const number = Number(digits) / 100
 
     if (isNaN(number)) {
-        return
+        return ""
     }
     return number.toLocaleString("pt-BR", {
         style: "currency",
