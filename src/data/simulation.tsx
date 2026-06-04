@@ -1,8 +1,8 @@
-import { CalendarClock, CreditCard, Goal, PiggyBank, Wallet, Landmark } from "lucide-react";
+import { CalendarClock, Goal, PiggyBank, Wallet, Landmark } from "lucide-react";
 
 import type { FormStepProps } from "../pages/components/features/simulation/FormStep";
 
-export const simulationFormSteps: FormStepProps[] = [
+export const simulationFormSteps = [
     {
         id: "income",
         icon: PiggyBank,
@@ -70,11 +70,7 @@ export const simulationFormSteps: FormStepProps[] = [
             max: 12,
 
         },
-        submitButtonProps: {
-            label: "Gerar simulação",
-            emojiIcon: "🚀",
 
-        }
     },
     {
         id: "investmentHorizon",
@@ -84,7 +80,14 @@ export const simulationFormSteps: FormStepProps[] = [
         inputProps: {
             placeholder: "Ex:5 anos",
             maxLength: 12,
+        },
+        submitButtonProps: {
+            label: "Gerar simulação",
+            emojiIcon: "🚀",
+
         }
     },
 
-]
+] satisfies FormStepProps[]
+
+export type SimulationFormData = Record<typeof simulationFormSteps[number]["id"], string>

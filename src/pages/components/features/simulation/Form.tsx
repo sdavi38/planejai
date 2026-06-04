@@ -1,7 +1,7 @@
 import { useState } from "react";
 import StepProgress from "./Progress"
 import FormStep from "./FormStep"
-import { simulationFormSteps } from "../../../../data/simulation"
+import { simulationFormSteps, type SimulationFormData } from "../../../../data/simulation"
 
 
 
@@ -9,9 +9,17 @@ export default function SimulationForm() {
     const [currentStepIndex, setCurrentStepIndex] = useState(0)
     const totalSteps = simulationFormSteps.length
     const currentStep = simulationFormSteps[currentStepIndex]
+    const [formData, setFormData] = useState<SimulationFormData>({} as SimulationFormData)
+
+    const handleNextStep = (value: string) => {
+
+        const updateFormData = { ...formData, [currentStep.id]: value }
+        setFormData(updateFormData)
+
+        console.log(updateFormData)
 
 
-    const handleNextStep = () => {
+
         if (currentStepIndex + 1 > totalSteps - 1) {
             return
         }
