@@ -16,3 +16,9 @@ export function formatCurrencyMask(value: string): string {
         maximumFractionDigits: 2
     })
 }
+
+export function paserCurrency(value: string): number {
+    return (
+        parseFloat(value.replace(/\./g, '').replace(',', '.').replace('R$', '')) || 0
+    )
+}
