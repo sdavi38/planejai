@@ -1,17 +1,34 @@
-import { type SimulationFormData } from "../data/simulation";
+import { type SimulationFormData, type SimulationRecord } from "../data/simulation";
+
 
 const LOCAL_STORAGE_KEY = 'simulation-data'
-
 export const useSimulationStorage = () => {
 
     const saveFormData = (formData: SimulationFormData) => {
-        const storage = localStorage.getItem(LOCAL_STORAGE_KEY)
-        const saveData = storage ? (JSON.parse(storage) as SimulationFormData[]) : []
 
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([...saveData, formData]))
+
+        const id = crypto.randomUUID()
+
+        const record: SimulationRecord = { ...formData, id }
+
+        const storage = localStorage.getItem(LOCAL_STORAGE_KEY)
+        const saveData = storage ? (JSON.parse(storage) as SimulationRecord[]) : []
+
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([...saveData, record]))
+
+        return id
+    }
+    const getFormData = (id: string) => {
+        const storage = localStorage.getItem(LOCAL_STORAGE_KEY)
+        if (!storage) {
+            return null
+        }
+        const saveData = JSON.parse(storage) as SimulationRecord[]
+        return saveData.find((record) => record.id === id) || null
     }
 
     return {
-        saveFormData
+        saveFormData,
+        getFormData
     }
 }

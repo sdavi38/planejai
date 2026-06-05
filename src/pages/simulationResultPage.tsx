@@ -1,12 +1,14 @@
-import { Calendar, CalendarClock, CreditCardIcon, Goal, Landmark, PiggyBank, Wallet2 } from "lucide-react";
+import { CalendarClock, CreditCardIcon, Goal, Landmark, PiggyBank, Wallet2 } from "lucide-react";
 import PageHero from "../components/Shared/pageHero";
 import { Card } from "./components/features/SimulationResult/Card";
-import type { SimulationFormData } from "../data/simulation";
+;
 import { simulateFinancialCalculation } from "../utils/simulation";
 import Divider from "../components/Shared/Divider";
+import { useParams } from "react-router-dom";
+import { useSimulationStorage } from "../hooks/useSimulationStorage";
 
 /* Simulação local */
-const mock: SimulationFormData = {
+/* const mock: SimulationFormData = {
     goalName: 'Viagem para Argentina',
     income: 'R$ 3.500,00',
     expenses: 'R$ 1.250,00',
@@ -14,12 +16,23 @@ const mock: SimulationFormData = {
     goalAmount: 'R$ 2.793,25',
     goalDeadLine: '12',
 }
-
+ */
 
 
 export default function SimulationResultPage() {
+    const { id } = useParams<{ id: string }>()
 
-    const data: SimulationFormData = mock;
+    const { getFormData } = useSimulationStorage()
+
+    const data = id ? getFormData(id) : null
+
+    if (!data) {
+        return <div>
+            <h1>Simulação não encontrada</h1>
+            <p>A simulação que você está tentando acessar não existe ou foi removida.</p>
+        </div>
+    }
+
     const monthlySavings = simulateFinancialCalculation(data);
     return (
         <main className="mx-auto max-w-6xl px-4 py-10 sm:py-14">
@@ -38,7 +51,7 @@ export default function SimulationResultPage() {
                 <Card
                     icon={CalendarClock}
                     label="Prazo"
-                    value={`${data.goalDeadLine} meses`}
+                    value={`${data.goalDeadline} meses`}
                     subtitle={'Prazo para atingir a meta'}
                 />
                 <Card
