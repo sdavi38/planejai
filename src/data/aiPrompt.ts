@@ -14,12 +14,12 @@ const RESPONSE_SCHEMA = `{
 
     "items":[<"Sugestões práticas de como cortar gastos ou aumentar renda para atingir a meta, ou reorganizar o orçamento"]
 },
-"extraIcome":{
+"extraIncome":{
 
 "items":[<"Ideas de Renda Extra com baixo ou nenhum investimento inicial,compativel com a realidade brasileira">]
 
 },
-"investiment":{
+"investment":{
     "items":[<"Sugestão de investimento acessivel para o perfil apresentado, com foco em atingir a meta>"],
 
 },

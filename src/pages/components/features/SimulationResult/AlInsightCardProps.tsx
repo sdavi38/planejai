@@ -1,6 +1,9 @@
+
+import "react-loading-skeleton/dist/skeleton.css"
 import { useInsight } from "../../../../hooks/useInsight"
 import { Content } from "../insights/Content"
 import { Error } from "../insights/Error"
+import Skeleton from "react-loading-skeleton"
 
 interface AIInsightCardProps {
     simulationId: string
@@ -17,12 +20,27 @@ export function AIInsightCard({ simulationId }: AIInsightCardProps) {
                 </span>
 
             </div>
-            {isLoading && <p>Gerando seus insights...</p>}
+            {isLoading && (
+                <div className="flex">
+                    <Skeleton
+                        count={11.5}
+                        baseColor="var(--color-skeleton-base)"
+                        highlightColor="var(--color-skeleton-highlight)"
+                        containerClassName="flex-1"
+                        className=" flex mb-3 rounded-lg"
+                        inline
+
+                    />
+                </div>
+            )}
+
+
+
             {!isLoading && error && (
                 <Error simulationId={simulationId} message={error}
                     onRetry={() => { fetchInsigh(simulationId) }} />
             )}
-            {!isLoading && insight && error && <Content />}
+            {!isLoading && insight && !error && <Content insight={insight} />}
         </div>
     )
 }

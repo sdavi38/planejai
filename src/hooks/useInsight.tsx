@@ -5,7 +5,6 @@ import { builAIPrompt } from "../data/aiPrompt";
 import type { SimulationRecord } from "../data/simulation";
 
 
-
 export const useInsight = (id: string) => {
     const isRequestPending = useRef(false)
 
@@ -26,8 +25,7 @@ export const useInsight = (id: string) => {
 
 
     const [isLoading, setLoading] = useState(false)
-    const [error, setError] = useState<Error | null>(null)
-
+    const [error, setError] = useState<Error | string | null>(null)
 
     const fetchInsigh = useCallback(async (
         simulationId: string) => {
