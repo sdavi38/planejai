@@ -1,4 +1,3 @@
-import { paserCurrency } from "../utils/currency"
 import { simulateFinancialCalculation } from "../utils/simulation"
 import type { SimulationRecord } from "./simulation"
 
@@ -34,7 +33,6 @@ export function builAIPrompt(simulation: SimulationRecord) {
     const { income, goalName, expenses, debts, goalAmount, goalDeadline } = simulation
 
     const monthlySavings = simulateFinancialCalculation(simulation)
-    const monthSavingsNeeded = paserCurrency(goalAmount) / parseInt(goalDeadline)
 
     return `
   Você é um educador financeiro em finanças pessoais, e analista de investimentos 

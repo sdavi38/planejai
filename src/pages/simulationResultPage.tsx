@@ -6,6 +6,7 @@ import { simulateFinancialCalculation } from "../utils/simulation";
 import Divider from "../components/Shared/Divider";
 import { useParams } from "react-router-dom";
 import { useSimulationStorage } from "../hooks/useSimulationStorage";
+import { AIInsightCard } from "./components/features/SimulationResult/AlInsightCardProps";
 
 /* Simulação local */
 /* const mock: SimulationFormData = {
@@ -72,9 +73,10 @@ export default function SimulationResultPage() {
 
 
             <div className="grid gap-6 lg:grid-cols-3">
-                <div className="bg-card order-2 rounded-2xl lg:order-1 lg:col-span-2 p-6 shadow-[4px_4px_18px_0px_rgba(0,0,0,0.2)]">
+                <AIInsightCard simulationId={data.id} />
+                {/*  <div className="bg-card order-2 rounded-2xl lg:order-1 lg:col-span-2 p-6 shadow-[4px_4px_18px_0px_rgba(0,0,0,0.2)]">
                     Painel de Insigths
-                </div>
+                </div> */}
 
 
                 <div className="order-1 flex flex-col gap-6 lg:order-2">

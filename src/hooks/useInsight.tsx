@@ -1,17 +1,33 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { getInsight, type InsightData } from "../services/aiServices";
 import { useSimulationStorage } from "./useSimulationStorage";
 import { builAIPrompt } from "../data/aiPrompt";
+import type { SimulationRecord } from "../data/simulation";
 
 
 
-export const useInsigh = (id: string) => {
-    const [insight, setInsightData] = useState<InsightData | null>(null)
+export const useInsight = (id: string) => {
+    const isRequestPending = useRef(false)
+
+    const { getFormData, updateSimulation } = useSimulationStorage()
+    const [insight, setInsightData] = useState<InsightData | null>(() => {
+        const simulation = getFormData(id)
+        if (simulation?.insight) {
+            try {
+                return JSON.parse(simulation.insight) as InsightData
+            } catch (e) {
+                console.error("Erro ao parsear o insight salvo:", e)
+            }
+        }
+        return null
+    })
+
+
+
+
     const [isLoading, setLoading] = useState(false)
     const [error, setError] = useState<Error | null>(null)
 
-
-    const { getFormData } = useSimulationStorage()
 
     const fetchInsigh = useCallback(async (
         simulationId: string) => {
@@ -21,34 +37,37 @@ export const useInsigh = (id: string) => {
             return;
 
         }
+        /* evitando requisições antes de finalizar anterior */
+        isRequestPending.current = true
+
         setLoading(true)
         setError(null)
 
         try {
             const prompt = builAIPrompt(simulation)
             const data = await getInsight(prompt)
-            setInsightData(data)
 
-            return data
+            setInsightData(data)
+            updateSimulation(simulationId, {
+                ...simulation,
+                insight: JSON.stringify(data)
+            } as SimulationRecord)
+
         } catch (error) {
             console.error(error)
             setError(new Error('Erro ao gerar o diagnstico financeiro.Tente novamente ou verifique.'))
         } finally {
+            isRequestPending.current = false
             setLoading(false)
         }
 
-    }, [getFormData])
+    }, [getFormData, updateSimulation])
 
     useEffect(() => {
-        if (insight || isLoading || error) {
+        if (insight || isLoading || error || isRequestPending.current) {
             return;
         }
-        fetchInsigh(id).then((data) => {
-            if (!data) {
-                return
-            }
-            setInsightData(data)
-        })
+        fetchInsigh(id)
 
     }, [id, isLoading, error, insight, fetchInsigh])
 
