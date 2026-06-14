@@ -45,7 +45,7 @@ export function builAIPrompt(simulation: SimulationRecord) {
   dados da simulação:
 - Renda Mensal: ${income}
 - Custos fixos essenciais: ${expenses}
-- Dívidas e Parcelas mensais: ${debts}
+- Dívidas e Parcelas mensais: ${debts}p
 -Valor disponivel por mês: ${monthlySavings} reais
     - Meta: ${goalName}
 - Custo da meta: ${goalAmount}
@@ -66,9 +66,6 @@ Regras:
 -"viable": Saldo após reseva para a meta é maior ou igual a 0 
 -"needs_adjustments": Saldo negativo atá 20% da economia do valor mensal necessaria
  -"unfeasible": Saldo negativo superior a 20% da economia do valor mensal necessaria
-
-
-
 
     `
 

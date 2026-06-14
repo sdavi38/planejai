@@ -1,11 +1,9 @@
 interface GeminiResponse {
     candidates: {
-
         content: {
             parts: { text: string }[]
         }
     }[]
-
 }
 
 
@@ -52,11 +50,7 @@ const callGeminiAPI = async (prompt: string) => {
     if (!response.ok) {
         throw new Error(`Erro ao chamar API do Gemini: ${response.statusText}`);
     }
-
-
-
     return (await response.json()) as GeminiResponse
-
 }
 
 export const getInsight = async (prompt: string) => {
