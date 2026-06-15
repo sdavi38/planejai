@@ -32,7 +32,7 @@ Tudo funciona diretamente no navegador: sem backend, sem banco de dados remoto. 
 | `prettier`                         | ^3.8.3  | Formatação de código                     |
 
 ---
-
+  
 
 ## Desafios
 

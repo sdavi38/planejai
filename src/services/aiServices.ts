@@ -85,24 +85,29 @@ export const getChatResponse = async (
         .map((msg) => `${msg.sender === "user" ? "Usuário" : "IA"}: ${msg.text}`)
         .join("\n");
 
+    // Defensively extract lists to handle typos or omitted fields in the initial AI JSON response
+    const investmentItems = initialInsight?.investment?.items || (initialInsight as any)?.investiment?.items || [];
+    const suggestionItems = initialInsight?.suggestion?.items || [];
+    const extraIncomeItems = initialInsight?.extraIncome?.items || [];
+
     const prompt = `
 Você é um educador financeiro especializado em finanças pessoais e atua como assistente virtual do Planej.ai. 
 Você está conversando com um usuário sobre a simulação financeira dele.
 
 Informações sobre a simulação do usuário:
-- Renda Mensal: ${simulation.income || "Não informado"}
-- Custos fixos essenciais: ${simulation.expenses || "Não informado"}
-- Dívidas e Parcelas mensais: ${simulation.debts || "Não informado"}
-- Meta: ${simulation.goalName || simulation.golName || "Não informado"}
-- Custo da meta: ${simulation.goalAmount || "Não informado"}
-- Prazo desejado: ${simulation.goalDeadline || "Não informado"} meses
+- Renda Mensal: ${simulation?.income || "Não informado"}
+- Custos fixos essenciais: ${simulation?.expenses || "Não informado"}
+- Dívidas e Parcelas mensais: ${simulation?.debts || "Não informado"}
+- Meta: ${simulation?.goalName || simulation?.golName || "Não informado"}
+- Custo da meta: ${simulation?.goalAmount || "Não informado"}
+- Prazo desejado: ${simulation?.goalDeadline || "Não informado"} meses
 
 Diagnóstico Inicial da IA sobre a meta:
-- Viabilidade: ${initialInsight.feasibility.content} (Status: ${initialInsight.feasibility.status})
-- Diagnóstico do orçamento: ${initialInsight.diagnosis.content}
-- Recomendações de investimentos sugeridas: ${initialInsight.investment.items.join(", ")}
-- Sugestões para o orçamento: ${initialInsight.suggestion.items.join(", ")}
-- Ideias de renda extra: ${initialInsight.extraIncome.items.join(", ")}
+- Viabilidade: ${initialInsight?.feasibility?.content || "Não informado"} (Status: ${initialInsight?.feasibility?.status || "Não informado"})
+- Diagnóstico do orçamento: ${initialInsight?.diagnosis?.content || "Não informado"}
+- Recomendações de investimentos sugeridas: ${investmentItems.join(", ") || "Não informado"}
+- Sugestões para o orçamento: ${suggestionItems.join(", ") || "Não informado"}
+- Ideias de renda extra: ${extraIncomeItems.join(", ") || "Não informado"}
 
 Histórico da Conversa:
 ${historyText || "(Nenhuma mensagem anterior)"}
