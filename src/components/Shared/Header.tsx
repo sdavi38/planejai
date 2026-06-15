@@ -1,12 +1,14 @@
 import { Clock, Moon, Sun, TrendingUp, Wallet } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "./Button";
 import { useTheme } from "../../hooks/useTheme";
 import Divider from "./Divider";
 
 
+
 export default function Header() {
     const navigate = useNavigate();
+    const { pathname } = useLocation();
     const { theme, toggleTheme } = useTheme();
 
     return (
@@ -25,7 +27,7 @@ export default function Header() {
                 {/* Action Buttons */}
                 <div className="flex items-center gap-1">
                     <Button
-                        variant="secondary"
+                        variant={pathname === "/" ? "secondary" : "ghost"}
                         icon={TrendingUp}
                         onClick={() => navigate("/")}>
 
@@ -33,7 +35,7 @@ export default function Header() {
 
                     </Button>
                     <Button
-                        variant="ghost"
+                        variant={pathname === "/history" ? "secondary" : "ghost"}
                         icon={Clock}
                         onClick={() => navigate("/history")}
                     ><span className="hidden sm:inline">Histórico</span>

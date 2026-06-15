@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import RootLayout from './components/layout/RootLayout';
 import SimulationPage from './pages/SimulationFormPage';
 import SimulationResultPage from './pages/SimulationResultPage';
+import SimulationHistory from './pages/SimulationHistory';
 
 
 export const router = createBrowserRouter([
@@ -19,8 +20,8 @@ export const router = createBrowserRouter([
                 element: <SimulationResultPage />
             },
             {
-                path: '/historico',
-                element: <h1>Elemento simulado</h1>
+                path: '/history',
+                element: <SimulationHistory />
 
             }
         ]

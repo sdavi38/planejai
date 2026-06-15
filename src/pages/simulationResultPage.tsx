@@ -74,10 +74,6 @@ export default function SimulationResultPage() {
 
             <div className="grid gap-6 lg:grid-cols-3">
                 <AIInsightCard simulationId={data.id} />
-                {/*  <div className="bg-card order-2 rounded-2xl lg:order-1 lg:col-span-2 p-6 shadow-[4px_4px_18px_0px_rgba(0,0,0,0.2)]">
-                    Painel de Insigths
-                </div> */}
-
 
                 <div className="order-1 flex flex-col gap-6 lg:order-2">
 

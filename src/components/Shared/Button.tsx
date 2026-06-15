@@ -12,7 +12,7 @@ const vatiantClass = {
     primary: 'bg-primary text-primary-foregroun font-semibold rounded-xl',
     secondary: 'bg-secondary-button border border-border rounded-3xl',
     ghost: 'text-foreground rounded-lg',
-    danger: 'bg-destructive text-destructive-foreground font-semibold rounded-xl',
+    danger: 'bg-destructive  text-red-600 hover:text-red-900/90 font-semibold ',
 }
 
 export function Button({
