@@ -25,7 +25,7 @@ export function Button({
 }: ButtonProps) {
     return (
         <button {...props} className={`${baseClasses} ${vatiantClass[variant]} ${className}`}>
-            {Icon && <Icon size={20} />}
+            {Icon && <Icon size={24} />}
 
             {children}
         </button >
