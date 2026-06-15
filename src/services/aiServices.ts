@@ -68,3 +68,58 @@ export const getInsight = async (prompt: string) => {
         throw new Error("Erro ao parsear JSON")
     }
 }
+
+export interface ChatMessage {
+    sender: "user" | "ai";
+    text: string;
+    timestamp: string;
+}
+
+export const getChatResponse = async (
+    simulation: any,
+    initialInsight: InsightData,
+    chatHistory: ChatMessage[],
+    userQuestion: string
+) => {
+    const historyText = chatHistory
+        .map((msg) => `${msg.sender === "user" ? "Usuário" : "IA"}: ${msg.text}`)
+        .join("\n");
+
+    const prompt = `
+Você é um educador financeiro especializado em finanças pessoais e atua como assistente virtual do Planej.ai. 
+Você está conversando com um usuário sobre a simulação financeira dele.
+
+Informações sobre a simulação do usuário:
+- Renda Mensal: ${simulation.income || "Não informado"}
+- Custos fixos essenciais: ${simulation.expenses || "Não informado"}
+- Dívidas e Parcelas mensais: ${simulation.debts || "Não informado"}
+- Meta: ${simulation.goalName || simulation.golName || "Não informado"}
+- Custo da meta: ${simulation.goalAmount || "Não informado"}
+- Prazo desejado: ${simulation.goalDeadline || "Não informado"} meses
+
+Diagnóstico Inicial da IA sobre a meta:
+- Viabilidade: ${initialInsight.feasibility.content} (Status: ${initialInsight.feasibility.status})
+- Diagnóstico do orçamento: ${initialInsight.diagnosis.content}
+- Recomendações de investimentos sugeridas: ${initialInsight.investment.items.join(", ")}
+- Sugestões para o orçamento: ${initialInsight.suggestion.items.join(", ")}
+- Ideias de renda extra: ${initialInsight.extraIncome.items.join(", ")}
+
+Histórico da Conversa:
+${historyText || "(Nenhuma mensagem anterior)"}
+
+Usuário perguntou: "${userQuestion}"
+
+Por favor, responda à pergunta do usuário de forma clara, prestativa, didática e direta. Mantenha um tom encorajador e profissional. Siga estas regras:
+1. Responda diretamente ao usuário (fale na segunda pessoa: "você").
+2. Seja objetivo e evite respostas excessivamente longas.
+3. Forneça conselhos financeiros práticos e seguros (não faça recomendações de compra/venda de ativos específicos fora do contexto educacional).
+4. Retorne apenas o texto da resposta (pode usar quebras de linha e formatação básica como negrito com asteriscos).
+`;
+
+    const response = await callGeminiAPI(prompt);
+    const text = response.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!text) {
+        throw new Error("Resposta vazia do chat");
+    }
+    return text.trim();
+};
