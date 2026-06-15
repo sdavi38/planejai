@@ -1,73 +1,55 @@
-# React + TypeScript + Vite
+# Planej.ai: Desenvolvendo um Educador Financeiro com React e IA Generativa
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+O **Planej.ai** é uma aplicação web de planejamento financeiro pessoal. O usuário preenche um formulário com informações sobre sua renda, gastos e uma meta financeira (como uma viagem ou a compra de um bem), e a aplicação usa inteligência artificial para gerar um diagnóstico personalizado com sugestões práticas, ideias de renda extra e um plano de ação.
 
-Currently, two official plugins are available:
+Tudo funciona diretamente no navegador: sem backend, sem banco de dados remoto. Os dados são salvos no `localStorage` e as análises são geradas em tempo real pela API do Google Gemini.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Stacks do Projeto
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Dependências de produção
 
-## Expanding the ESLint configuration
+| Pacote                   | Versão  | Finalidade                   |
+| ------------------------ | ------- | ---------------------------- |
+| `react`                  | ^19.2.6 | Biblioteca principal de UI   |
+| `react-dom`              | ^19.2.6 | Renderização React no DOM    |
+| `react-router-dom`       | ^7.16.0 | Roteamento client-side (SPA) |
+| `tailwindcss`            | ^4.3.0  | Framework de CSS utilitário  |
+| `@tailwindcss/vite`      | ^4.2.2  | Plugin Tailwind para Vite    |
+| `@fontsource/inter`      | ^5.2.8  | Fonte Inter auto-hospedada   |
+| `lucide-react`           | ^1.5.0  | Biblioteca de ícones SVG     |
+| `react-loading-skeleton` | ^3.5.0  | Skeletons de carregamento    |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Dependências de desenvolvimento
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+| Pacote                             | Versão  | Finalidade                               |
+| ---------------------------------- | ------- | ---------------------------------------- |
+| `vite`                             | ^8.0.12  | Build tool e dev server                  |
+| `typescript`                       | ~6.0.2  | Tipagem estática                         |
+| `@vitejs/plugin-react`             | ^6.0.1  | Suporte a React no Vite (Fast Refresh)   |
+| `eslint`                           | ^10.0.0 | Linter de código                         |
+| `prettier`                         | ^3.8.3  | Formatação de código                     |
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Desafios
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+### Desafio 1 — Página de Histórico de Simulações
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+- Exiba um resumo de cada simulação salva
+- Crie um layout responsivo seguindo o protótipo
+- Permita excluir uma simulação do histórico
+- Ao clicar em "Ver detalhes", navegue para a página de resultados com os insights já gerados
+
+### Desafio 2 — Conversando com o Educador Financeiro
+
+- Adicione um campo de texto dentro do componente `AIInsightCard`
+- Permita que o usuário faça perguntas sobre a simulação realizada
+- A IA deve retornar respostas claras e exibi-las seguindo o protótipo
+- O scroll deve rolar automaticamente quando a IA retornar uma resposta
+- Mostre feedback de carregamento e erro para o usuário
+- O usuário pode fazer quantas perguntas quiser por simulação
+- Todo o histórico de perguntas e respostas deve ser exibido na tela
+- As conversas devem ser salvas no `localStorage` para consulta posterior
