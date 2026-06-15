@@ -26,7 +26,7 @@ export function CardHistory({ simulation, onDelete }: CardHistoryProps) {
       return simulation.goalName || (simulation as any).golName || "Sem nome";
    };
 
-   const getStatusDetails = () => {
+   /* const getStatusDetails = () => {
       if (!simulation.insight) {
          return {
             label: "Sem diagnóstico",
@@ -61,8 +61,10 @@ export function CardHistory({ simulation, onDelete }: CardHistoryProps) {
       };
    };
 
+   const monthlySavings = simulateFinancialCalculation(simulation); */
+   //const status = getStatusDetails();
+
    const monthlySavings = simulateFinancialCalculation(simulation);
-   const status = getStatusDetails();
 
    return (
       <div
@@ -71,10 +73,10 @@ export function CardHistory({ simulation, onDelete }: CardHistoryProps) {
          {/* Esquerda: Título, Data e Status */}
          <div className="flex flex-col gap-2 w-full md:w-auto md:min-w-[280px] md:max-w-[320px]">
             <div className="flex items-center gap-3 w-full">
-               <div className="bg-primary flex h-9 w-9 shrink-0 items-center justify-center rounded-xl">
+               <div className="bg-primary/60 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl">
                   <Goal size={20} className="text-primary-foreground" />
                </div>
-               <h3 className="tracking-wider text-muted-foreground font-semibold group-hover:text-primary transition-colors line-clamp-1 flex-1">
+               <h3 className="tracking-wider nd font-semibold group-hover:text-primary transition-colors line-clamp-1 flex-1">
                   {getGoalName()}
                </h3>
                {/* <span className={`shrink-0 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold ${status.className}`}>
