@@ -75,6 +75,7 @@ export interface ChatMessage {
     timestamp: string;
 }
 
+/* chatHistory: ChatMessage[] = [] */
 export const getChatResponse = async (
     simulation: any,
     initialInsight: InsightData,
@@ -124,7 +125,7 @@ Por favor, responda à pergunta do usuário de forma clara, prestativa, didátic
     const response = await callGeminiAPI(prompt);
     const text = response.candidates?.[0]?.content?.parts?.[0]?.text;
     if (!text) {
-        throw new Error("Resposta vazia do chat");
+        throw new Error("Erro ao gerar resposta do chat. Tente novamente.");
     }
     return text.trim();
 };

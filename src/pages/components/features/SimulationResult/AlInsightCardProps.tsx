@@ -92,15 +92,19 @@ export function AIInsightCard({ simulationId }: AIInsightCardProps) {
                 timestamp: new Date().toISOString(),
             };
 
-            const finalMessages = [...updatedMessages, aiMsg];
-            setChatMessages(finalMessages);
-
-            // Save the AI response to local storage
-            if (sim) {
+            // Fetch the freshest simulation record to prevent overwriting updates
+            const freshSim = getFormData(simulationId);
+            if (freshSim) {
+                const currentHistory = (freshSim as any).chatHistory || updatedMessages;
+                const finalMessages = [...currentHistory, aiMsg];
+                setChatMessages(finalMessages);
                 updateSimulation(simulationId, {
-                    ...sim,
+                    ...freshSim,
                     chatHistory: finalMessages,
                 } as any);
+            } else {
+                const finalMessages = [...updatedMessages, aiMsg];
+                setChatMessages(finalMessages);
             }
         } catch (err) {
             console.error("Erro na resposta do chat:", err);

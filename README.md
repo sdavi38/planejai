@@ -36,6 +36,7 @@ Tudo funciona diretamente no navegador: sem backend, sem banco de dados remoto. 
 
 ## Desafios
 
+
 ### Desafio 1 — Página de Histórico de Simulações
 
 - Exiba um resumo de cada simulação salva
@@ -52,4 +53,7 @@ Tudo funciona diretamente no navegador: sem backend, sem banco de dados remoto. 
 - Mostre feedback de carregamento e erro para o usuário
 - O usuário pode fazer quantas perguntas quiser por simulação
 - Todo o histórico de perguntas e respostas deve ser exibido na tela
+
 - As conversas devem ser salvas no `localStorage` para consulta posterior
+
+
