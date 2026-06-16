@@ -148,6 +148,24 @@ Clique em **Nova Simulação** no menu superior'
 4. Clique em **Cancelar** e verifique se nada é removido.
 5. Clique em **Excluir** e confirme se a simulação foi apagada da listagem física e do `localStorage` com sucesso.
 
+
+
+## Aprendizados Durante o Desafio
+
+Durante o desenvolvimento e resolução deste desafio, tive a oportunidade de adquirir e consolidar diversos conhecimentos técnicos relevantes em desenvolvimento front-end com React, integração com Inteligência Artificial e deploy de aplicações:
+
+1.  **Integração Contextualizada de LLMs**: Aprendi como estruturar prompts complexos contendo múltiplos metadados locais (como valores numéricos da simulação) combinados com o histórico dinâmico de conversas anteriores. Isso me permitiu criar uma experiência de chat contextual contínua, onde o modelo da IA do Gemini se comporta de forma totalmente coerente com as entradas do usuário.
+
+2.  **Gerenciamento de estado e uso de componentes personalizados**: Aprendi como gerenciar o estado de componentes complexos e como criar componentes reutilizáveis. Além disso, aprendi sobre o uso de componentes personalizados, como o AIInsightCard.tsx, que é responsável por exibir as respostas da IA e o feedback de carregamento. O uso de hooks como useEffect e useState foi fundamental para o gerenciamento do estado e para a atualização da interface do usuário.
+
+3.  **Gerenciamento Robusto de Persistência com React**: Aprofundei minhas habilidades em registrar e atualizar estados complexos no `localStorage` sem gerar concorrências ou inconsistências. Entendi como recuperar e sincronizar o histórico de chat de forma estável, mitigando condições de corrida comuns em estados React assíncronos.
+
+4.  **Aprimoramento de UX e Comportamentos de Tela**: Pratiquei o desenvolvimento de micro-interações como feedbacks dinâmicos de digitação (efeito bounce animado) e controle de foco inteligente através de múltiplos comportamentos de scroll suave (scrollTop da conversa e scrollInto View da tela) com atraso sincronizado ao ciclo do React.
+
+
+
+
+
 ---
 
 ## Desafios Concluídos e Implementações
@@ -376,19 +394,6 @@ Abaixo está a relação de todos os tópicos solicitados nos desafios e os trec
         ```
 
 ---
-
-## Aprendizados Durante o Desafio
-
-Durante o desenvolvimento e resolução deste desafio, tive a oportunidade de adquirir e consolidar diversos conhecimentos técnicos relevantes em desenvolvimento front-end com React, integração com Inteligência Artificial e deploy de aplicações:
-
-1.  **Integração Contextualizada de LLMs**: Aprendi como estruturar prompts complexos contendo múltiplos metadados locais (como valores numéricos da simulação) combinados com o histórico dinâmico de conversas anteriores. Isso me permitiu criar uma experiência de chat contextual contínua, onde o modelo da IA do Gemini se comporta de forma totalmente coerente com as entradas do usuário.
-
-2.  **Gerenciamento de estado e uso de componentes personalizados**: Aprendi como gerenciar o estado de componentes complexos e como criar componentes reutilizáveis. Além disso, aprendi sobre o uso de componentes personalizados, como o AIInsightCard.tsx, que é responsável por exibir as respostas da IA e o feedback de carregamento. O uso de hooks como useEffect e useState foi fundamental para o gerenciamento do estado e para a atualização da interface do usuário.
-
-3.  **Gerenciamento Robusto de Persistência com React**: Aprofundei minhas habilidades em registrar e atualizar estados complexos no `localStorage` sem gerar concorrências ou inconsistências. Entendi como recuperar e sincronizar o histórico de chat de forma estável, mitigando condições de corrida comuns em estados React assíncronos.
-
-4.  **Aprimoramento de UX e Comportamentos de Tela**: Pratiquei o desenvolvimento de micro-interações como feedbacks dinâmicos de digitação (efeito bounce animado) e controle de foco inteligente através de múltiplos comportamentos de scroll suave (scrollTop da conversa e scrollInto View da tela) com atraso sincronizado ao ciclo do React.
-
 
 
 
