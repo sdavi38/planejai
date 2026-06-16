@@ -31,8 +31,124 @@ Tudo funciona diretamente no navegador: sem backend, sem banco de dados remoto. 
 | `eslint`                           | ^10.0.0 | Linter de código                         |
 | `prettier`                         | ^3.8.3  | Formatação de código                     |
 
+## Como Executar a Aplicação
+
+Siga as etapas abaixo para configurar e executar o projeto localmente:
+
+### Pré-requisitos
+
+Certifique-se de ter instalado em sua máquina:
+*   [Node.js](https://nodejs.org/) (versão 18 ou superior recomendada)
+*   Um gerenciador de pacotes (`npm`, `yarn` ou `pnpm`)
+
+### Passo 1: Instalar as Dependências
+
+Abra o terminal na pasta raiz do projeto e execute o comando correspondente ao seu gerenciador de pacotes:
+
+```bash
+# Usando npm
+npm install
+
+# Usando yarn
+yarn install
+
+# Usando pnpm
+pnpm install
+```
+
+### Passo 2: Configurar a Chave de API do Gemini
+
+Crie um arquivo chamado `.env.local` na raiz do projeto e defina a variável `VITE_GEMINI_API_KEY` com a sua chave de API obtida no Google AI Studio:
+
+```env
+VITE_GEMINI_API_KEY="SUA_CHAVE_API_DO_GEMINI"
+```
+
+> [!TIP]
+> Caso queira obter uma chave de API do Gemini, acesse o painel do [Google AI Studio](https://aistudio.google.com/).
+
+### Passo 3: Iniciar o Servidor de Desenvolvimento
+
+Para rodar a aplicação em modo de desenvolvimento local:
+
+```bash
+# Usando npm
+npm run dev
+
+# Usando yarn
+yarn dev
+
+# Usando pnpm
+pnpm dev
+```
+
+Após inicializar, a aplicação estará disponível para acesso em: [http://localhost:5173](http://localhost:5173)
+
+### Passo 4: Compilar para Produção (Build)
+
+Para realizar a análise estática e gerar a build de produção otimizada na pasta `/dist`:
+
+```bash
+# Usando npm
+npm run build
+
+# Usando yarn
+yarn build
+
+# Usando pnpm
+pnpm build
+```
+
 ---
-  
+
+## Como Testar o Fluxo Principal
+
+Para validar todas as funcionalidades da aplicação de ponta a ponta, siga o roteiro de teste do fluxo principal a seguir:
+
+### Passo 1: Criar uma Nova Simulação Financeira
+1. Acesse a página inicial da aplicação: [http://localhost:5173]
+Clique em **Nova Simulação** no menu superior'
+2. O formulário guiará você passo a passo. Insira valores fictícios para teste, por exemplo:
+   * **Renda Mensal Bruta**: R$ 5.000,00
+   * **Custos Fixos**: R$ 2.000,00
+   * **Dívidas e Parcelas**: R$ 500,00
+   * **Nome da Meta**: Viagem para Londres
+   * **Valor Total da Meta**: R$ 12.000,00
+   * **Prazo da Meta**: 12 meses
+   * **Prazo de Investimento**: 5 anos (ou outro de sua preferência)
+3. No último passo, clique no botão **Gerar simulação 🚀** para disparar a análise e aguarde a chamada da IA.
+
+### Passo 2: Analisar os Resultados e o Diagnóstico da IA
+1. Você será redirecionado automaticamente para a página do resultado (com rota `/result/:id`).
+2. Verifique na parte superior os cards com as contas calculadas (custo da meta, prazo e a economia recomendada mensalmente).
+3. No centro da tela, verifique o card **Insight Financeiro Personalizado** contendo a análise gerada pela inteligência artificial (Viabilidade, Diagnóstico, Sugestões Práticas, Investimentos e Mensagem Final).
+
+### Passo 3: Interagir com o Assistente Virtual (Chat Contextual)
+1. Role a tela até a área inferior do card de diagnóstico, onde está escrito **💬 Converse com seu Assistente**.
+2. No campo de texto que diz *"Faça uma pergunta sobre sua simulação..."*, digite uma pergunta relacionada aos dados inseridos. Exemplos:
+   * *“Onde posso reduzir meus custos fixos para sobrar mais dinheiro?”*
+   * *“Qual tipo de título de renda fixa você recomenda para guardar esses R$ 834 por mês?”*
+3. Pressione a tecla **Enter** ou clique no botão de envio (ícone de avião de papel).
+4. Verifique o estado visual animado *"Analisando sua pergunta..."*.
+5. Assim que a IA retornar a resposta:
+   * O chat rolará a tela de forma automática e suave para manter a resposta mais recente visível.
+   * O balão cinza mostrará as dicas personalizadas da IA e as perguntas anteriores ficarão legíveis logo acima.
+
+### Passo 4: Persistência e Navegação no Histórico
+1. No menu do cabeçalho superior (Header), clique em **Histórico**.
+2. Verifique se a simulação recém-criada (ex: *"Viagem para Londres"*) aparece listada com o resumo dos custos e prazo.
+3. Atualize a página do navegador (F5). Note que as simulações persistem na tela.
+4. Clique no botão **Ver detalhes** do card da simulação que você acabou de criar.
+5. Verifique se o resultado carrega instantaneamente e se **todo o histórico da conversa** que você manteve com o chat assistente é recuperado intacto do `localStorage`.
+
+### Passo 5: Testar a Exclusão Segura com Confirmação
+1. Volte para a página de **Histórico**.
+2. Clique no botão de lixeira vermelha (Excluir) em algum dos cards.
+3. Note a abertura do **Modal personalizado de Confirmação** (com visual estilizado e animação de balanço no ícone de aviso). O modal exibirá de forma dinâmica o nome da meta que você escolheu (ex: *"Tem certeza que deseja excluir a simulação de meta "Viagem para Londres"?"*).
+4. Clique em **Cancelar** e verifique se nada é removido.
+5. Clique em **Excluir** e confirme se a simulação foi apagada da listagem física e do `localStorage` com sucesso.
+
+---
 
 ## Desafios Concluídos e Implementações
 
@@ -258,5 +374,21 @@ Abaixo está a relação de todos os tópicos solicitados nos desafios e os trec
             } as any);
         }
         ```
+
+---
+
+## Aprendizados Durante o Desafio
+
+Durante o desenvolvimento e resolução deste desafio, tive a oportunidade de adquirir e consolidar diversos conhecimentos técnicos relevantes em desenvolvimento front-end com React, integração com Inteligência Artificial e deploy de aplicações:
+
+1.  **Integração Contextualizada de LLMs**: Aprendi como estruturar prompts complexos contendo múltiplos metadados locais (como valores numéricos da simulação) combinados com o histórico dinâmico de conversas anteriores. Isso me permitiu criar uma experiência de chat contextual contínua, onde o modelo da IA do Gemini se comporta de forma totalmente coerente com as entradas do usuário.
+
+2.  **Gerenciamento de estado e uso de componentes personalizados**: Aprendi como gerenciar o estado de componentes complexos e como criar componentes reutilizáveis. Além disso, aprendi sobre o uso de componentes personalizados, como o AIInsightCard.tsx, que é responsável por exibir as respostas da IA e o feedback de carregamento. O uso de hooks como useEffect e useState foi fundamental para o gerenciamento do estado e para a atualização da interface do usuário.
+
+3.  **Gerenciamento Robusto de Persistência com React**: Aprofundei minhas habilidades em registrar e atualizar estados complexos no `localStorage` sem gerar concorrências ou inconsistências. Entendi como recuperar e sincronizar o histórico de chat de forma estável, mitigando condições de corrida comuns em estados React assíncronos.
+
+4.  **Aprimoramento de UX e Comportamentos de Tela**: Pratiquei o desenvolvimento de micro-interações como feedbacks dinâmicos de digitação (efeito bounce animado) e controle de foco inteligente através de múltiplos comportamentos de scroll suave (scrollTop da conversa e scrollInto View da tela) com atraso sincronizado ao ciclo do React.
+
+
 
 
